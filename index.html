@@ -1,0 +1,1515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>How Kinly Works</title>
+<meta name="description" content="Kinly protects an older person from scam calls without changing their phone, their number, or anything they have to remember. Here is exactly how it works." />
+
+<meta name="theme-color" content="#1C1613" />
+<meta name="color-scheme" content="dark" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Kinly" />
+<meta property="og:title" content="How Kinly Works" />
+<meta property="og:description" content="Grandma should not have to decide whether an unknown caller is safe. Her family should decide." />
+<meta property="og:url" content="https://lemon-sandwich.github.io/kinly-site/" />
+<meta property="og:image" content="https://lemon-sandwich.github.io/kinly-site/preview.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Kinly — somebody in the family decides who gets through." />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="How Kinly Works" />
+<meta name="twitter:description" content="Grandma should not have to decide whether an unknown caller is safe. Her family should decide." />
+<meta name="twitter:image" content="https://lemon-sandwich.github.io/kinly-site/preview.png" />
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>&#129686;</text></svg>" />
+</head>
+<body>
+<style>
+  :root {
+    --ground: #1C1613;
+    --surface: #262019;
+    --raised: #322A22;
+    --border: #443A30;
+    --border-soft: #362E26;
+
+    --text: #F6EDE3;
+    --muted: #B5A395;
+    --faint: #857567;
+
+    --good: #63B98C;
+    --warn: #DFA83F;
+    --bad: #DC7A6A;
+    --pending: #A18BD6;
+
+    --accent: #E39A55;
+    --on-accent: #241A12;
+
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+    --sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+    --spine: 41rem;
+    --wide: 66rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.62;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: rgba(227,154,85,0.3); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .spine {
+    max-width: var(--spine);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  .band {
+    max-width: var(--wide);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  section {
+    padding-block: 4.5rem;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .stack { display: flex; flex-direction: column; gap: 1.15rem; }
+
+  h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  h1 { font-size: clamp(2.5rem, 6.5vw, 3.9rem); line-height: 1.06; letter-spacing: -0.028em; }
+  h2 { font-size: clamp(1.75rem, 3.6vw, 2.35rem); line-height: 1.15; }
+  h3 { font-size: 1.2rem; line-height: 1.3; }
+
+  p { margin: 0; }
+  p + p { margin-top: 1.05rem; }
+
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 0.85rem;
+  }
+
+  .lede { font-size: 1.2rem; line-height: 1.55; color: var(--muted); }
+  .dim { color: var(--muted); }
+
+  strong { color: var(--text); font-weight: 600; }
+
+  /* ---------- hero ---------- */
+
+  .hero {
+    border-top: none;
+    padding-block: clamp(4rem, 13vh, 7.5rem) 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -34rem;
+    left: 50%;
+    width: 60rem;
+    height: 60rem;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(227,154,85,0.13), rgba(227,154,85,0.035) 42%, transparent 66%);
+    pointer-events: none;
+  }
+
+  .hero > * { position: relative; }
+
+  .mark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 3rem;
+  }
+
+  .mark .dot {
+    width: 0.52rem;
+    height: 0.52rem;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 14px 2px rgba(227,154,85,0.5);
+  }
+
+  .hero h1 { max-width: 15ch; }
+  .hero .lede { margin-top: 1.6rem; max-width: 44ch; font-size: 1.28rem; }
+
+  .premise {
+    margin-top: 3.25rem;
+    padding: 1.45rem 0 1.45rem 1.6rem;
+    border-left: 2px solid var(--accent);
+    font-family: var(--serif);
+    font-size: 1.35rem;
+    line-height: 1.42;
+    max-width: 38ch;
+  }
+
+  .not-list {
+    margin-top: 3.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .not-list span {
+    font-size: 0.86rem;
+    color: var(--faint);
+    border: 1px dashed var(--border);
+    border-radius: 999px;
+    padding: 0.34rem 0.85rem;
+    text-decoration: line-through;
+    text-decoration-color: rgba(220,122,106,0.55);
+  }
+
+  .not-label {
+    margin-top: 2.5rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  /* ---------- actors ---------- */
+
+  .actors {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1px;
+    margin-top: 2.75rem;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .actor {
+    background: var(--surface);
+    padding: 1.6rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .actor .role {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .actor .name { font-family: var(--serif); font-size: 1.28rem; }
+  .actor .surface-note { font-size: 0.94rem; color: var(--muted); line-height: 1.52; }
+
+  .actor .cadence {
+    margin-top: auto;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border-soft);
+    font-size: 0.83rem;
+    color: var(--faint);
+  }
+
+  /* ---------- loop ---------- */
+
+  .loop {
+    counter-reset: step;
+    margin-top: 2.75rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 2.6rem 1fr;
+    gap: 1.15rem;
+    padding-bottom: 1.9rem;
+    position: relative;
+  }
+
+  .step:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 1.29rem;
+    top: 2.5rem;
+    bottom: 0.15rem;
+    width: 1px;
+    background: linear-gradient(var(--border), var(--border-soft));
+  }
+
+  .step .num {
+    counter-increment: step;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    display: grid;
+    place-items: center;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .step .num::before { content: counter(step); }
+
+  .step[data-actor="phone"] .num { border-color: rgba(99,185,140,0.45); color: var(--good); }
+  .step[data-actor="you"] .num { border-color: rgba(227,154,85,0.5); color: var(--accent); }
+  .step[data-actor="caller"] .num { border-color: rgba(161,139,214,0.45); color: var(--pending); }
+
+  .step h3 { margin-bottom: 0.35rem; padding-top: 0.28rem; }
+  .step p { color: var(--muted); font-size: 0.98rem; }
+
+  .step .who-does {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--faint);
+    background: var(--raised);
+    border-radius: 6px;
+    padding: 0.22rem 0.6rem;
+  }
+
+  .callout {
+    margin-top: 1.75rem;
+    padding: 1.4rem 1.55rem;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    font-size: 0.98rem;
+    color: var(--muted);
+  }
+
+  .callout h3 { font-size: 1.08rem; margin-bottom: 0.55rem; color: var(--text); }
+
+  /* ---------- states ---------- */
+
+  .states {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.15rem;
+    margin-top: 2.75rem;
+  }
+
+  .state-card {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-top: 3px solid var(--faint);
+    border-radius: 14px;
+    padding: 1.45rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .state-card.is-trusted { border-top-color: var(--good); }
+  .state-card.is-unknown { border-top-color: var(--warn); }
+  .state-card.is-blocked { border-top-color: var(--bad); }
+
+  .state-card h3 { font-size: 1.14rem; }
+  .state-card.is-trusted h3 { color: var(--good); }
+  .state-card.is-unknown h3 { color: var(--warn); }
+  .state-card.is-blocked h3 { color: var(--bad); }
+
+  .state-card p { font-size: 0.94rem; color: var(--muted); line-height: 1.55; }
+
+  .state-card .who {
+    margin-top: auto;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border-soft);
+    font-size: 0.85rem;
+    color: var(--faint);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.42rem;
+    font-size: 0.8rem;
+    border-radius: 999px;
+    padding: 0.26rem 0.7rem;
+    border: 1px solid;
+  }
+
+  .pill::before {
+    content: '';
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: currentColor;
+    flex: 0 0 auto;
+  }
+
+  .pill.trusted { color: var(--good); border-color: rgba(99,185,140,0.4); background: rgba(99,185,140,0.09); }
+  .pill.unknown { color: var(--warn); border-color: rgba(223,168,63,0.4); background: rgba(223,168,63,0.09); }
+  .pill.blocked { color: var(--bad); border-color: rgba(220,122,106,0.4); background: rgba(220,122,106,0.09); }
+
+  /* ---------- exhibits ---------- */
+
+  .exhibit {
+    margin-top: 2.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .exhibit-head {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .exhibit-head .t {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .exhibit-head .s { font-size: 0.88rem; color: var(--faint); }
+
+  .exhibit-body { padding: 1.75rem 1.5rem 2rem; }
+
+  .controls { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .ctrl-group { display: flex; flex-direction: column; gap: 0.65rem; }
+
+  .ctrl-label {
+    font-size: 0.87rem;
+    color: var(--faint);
+  }
+
+  button.chip {
+    font-size: 0.87rem;
+    color: var(--muted);
+    background: var(--raised);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.46rem 0.95rem;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+  }
+
+  button.chip:hover { border-color: var(--faint); color: var(--text); }
+
+  button.chip[aria-pressed="true"] {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  /* ---------- phone ---------- */
+
+  .bench { display: flex; flex-wrap: wrap; gap: 2.25rem; align-items: flex-start; }
+
+  .phone {
+    width: 17.5rem;
+    flex: 0 0 auto;
+    background: var(--ground);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 0.55rem;
+    box-shadow: 0 22px 50px -20px rgba(0,0,0,0.75);
+  }
+
+  .phone-screen {
+    background: var(--ground);
+    border-radius: 24px;
+    padding: 1.1rem 1rem 1.4rem;
+    min-height: 25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .notch {
+    width: 3.6rem;
+    height: 0.28rem;
+    border-radius: 999px;
+    background: var(--border);
+    margin: 0 auto 0.5rem;
+  }
+
+  .phone-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--serif);
+    font-size: 1.32rem;
+  }
+
+  .phone-nav .n-sub {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .status-card {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-left: 3px solid var(--faint);
+    border-radius: 14px;
+    padding: 1rem 1.05rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-left-color 0.25s ease;
+  }
+
+  .status-card .sc-head { display: flex; align-items: flex-start; gap: 0.55rem; }
+
+  .status-card .sc-dot {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--good);
+    margin-top: 0.42rem;
+    flex: 0 0 auto;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .status-card .sc-headline { font-family: var(--serif); font-size: 1.1rem; line-height: 1.25; }
+  .status-card .sc-detail { font-size: 0.84rem; line-height: 1.48; color: var(--muted); }
+
+  .status-card .sc-sync {
+    font-size: 0.75rem;
+    color: var(--faint);
+    padding-top: 0.55rem;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  .row-item {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 0.75rem 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .row-item .ri-main { font-size: 0.89rem; }
+  .row-item .ri-sub { font-size: 0.74rem; color: var(--faint); margin-top: 0.15rem; }
+
+  .btn-accent {
+    background: var(--accent);
+    color: var(--on-accent);
+    border-radius: 12px;
+    padding: 0.72rem 1rem;
+    font-size: 0.89rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .btn-quiet {
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.72rem 1rem;
+    font-size: 0.89rem;
+    text-align: center;
+  }
+
+  .bench-notes {
+    flex: 1 1 17rem;
+    min-width: 15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .note-title { font-family: var(--serif); font-size: 1.15rem; }
+  .bench-notes p { font-size: 0.96rem; color: var(--muted); line-height: 1.56; }
+
+  .status-key { display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0.35rem; }
+
+  .key-row {
+    display: grid;
+    grid-template-columns: 0.55rem 1fr;
+    gap: 0.7rem;
+    align-items: start;
+    font-size: 0.89rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .key-row i { width: 0.55rem; height: 0.55rem; border-radius: 50%; margin-top: 0.45rem; }
+
+  .key-row b { color: var(--text); font-weight: 600; display: block; }
+
+  /* ---------- simulator ---------- */
+
+  .sim-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.75rem;
+    align-items: start;
+  }
+
+  .verdict {
+    margin-top: 1.9rem;
+    background: var(--raised);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .verdict-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem; }
+
+  .verdict-action {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    line-height: 1.05;
+    transition: color 0.22s ease;
+  }
+
+  .verdict-what { font-size: 1rem; color: var(--muted); line-height: 1.55; }
+
+  .verdict-meta {
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border-soft);
+    font-size: 0.88rem;
+    color: var(--faint);
+  }
+
+  .verdict-meta b { color: var(--muted); font-weight: 600; }
+
+  .policy-note { font-size: 0.87rem; color: var(--faint); line-height: 1.5; margin-top: 0.5rem; }
+
+  /* ---------- sms ---------- */
+
+  .thread { display: flex; flex-direction: column; gap: 1.6rem; margin-top: 2.5rem; }
+
+  .msg-block { display: flex; flex-direction: column; gap: 0.7rem; }
+
+  .msg-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.85rem;
+    align-items: baseline;
+    font-size: 0.84rem;
+    color: var(--faint);
+  }
+
+  .msg-meta .id { color: var(--accent); }
+
+  .bubble {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 18px 18px 18px 5px;
+    padding: 1.05rem 1.25rem;
+    max-width: 33rem;
+    white-space: pre-wrap;
+    font-size: 0.97rem;
+    line-height: 1.56;
+  }
+
+  .bubble.inbound {
+    border-radius: 18px 18px 5px 18px;
+    background: var(--raised);
+    align-self: flex-end;
+    border-color: var(--border);
+  }
+
+  .msg-note { font-size: 0.92rem; color: var(--faint); line-height: 1.55; max-width: 38rem; }
+
+  .ai-card {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    padding: 1.2rem 1.35rem;
+    max-width: 33rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .ai-card .ai-label {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+
+  .ai-fields {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1.1rem;
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .ai-fields dt { color: var(--faint); font-size: 0.88rem; }
+  .ai-fields dd { margin: 0; color: var(--text); }
+
+  .ai-disclaimer {
+    font-size: 0.87rem;
+    color: var(--warn);
+    line-height: 1.5;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border-soft);
+  }
+
+  /* ---------- decisions ---------- */
+
+  .decisions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.15rem;
+    margin-top: 2.75rem;
+  }
+
+  .decision {
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    padding: 1.45rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .decision h3 { font-size: 1.1rem; line-height: 1.32; }
+  .decision p { font-size: 0.95rem; color: var(--muted); line-height: 1.56; }
+
+  .decision .because {
+    margin-top: auto;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border-soft);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--faint);
+    font-style: italic;
+  }
+
+  footer {
+    border-top: 1px solid var(--border-soft);
+    padding-block: 3.5rem 4.5rem;
+  }
+
+  footer .f-line {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    color: var(--text);
+    max-width: 26ch;
+    line-height: 1.35;
+  }
+
+  footer .f-sub {
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 40ch;
+    line-height: 1.55;
+  }
+
+  footer .f-meta {
+    margin-top: 2rem;
+    font-size: 0.86rem;
+    color: var(--faint);
+    line-height: 1.6;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+
+  @media (max-width: 34rem) {
+    body { font-size: 16px; }
+    section { padding-block: 3.25rem; }
+    .phone { width: 100%; max-width: 17.5rem; margin-inline: auto; }
+    .bench { justify-content: center; }
+  }
+</style>
+
+<header class="hero spine">
+  <div class="mark">
+    <span class="dot"></span>
+    <span>Kinly</span>
+  </div>
+
+  <h1>Somebody in the family decides who gets through.</h1>
+
+  <p class="lede">
+    Kinly protects an older person from scam calls &mdash; without changing their phone, their
+    number, or anything they have to remember. They are asked to do one thing, once: tap a
+    link in a text and say yes.
+  </p>
+
+  <blockquote class="premise">
+    Grandma should not have to decide whether an unknown caller is safe. Her family should
+    decide.
+  </blockquote>
+
+  <p class="not-label">What Kinly is not</p>
+  <div class="not-list">
+    <span>a spam blocker</span>
+    <span>a new phone number</span>
+    <span>an app your mum has to learn</span>
+    <span>an AI that decides for her</span>
+    <span>a call recorder</span>
+  </div>
+</header>
+
+<section id="actors">
+  <div class="spine stack">
+    <div>
+      <p class="eyebrow">Who is involved</p>
+      <h2>Three people, and only one of them does any work</h2>
+    </div>
+    <p class="dim">
+      Everything about Kinly comes from one idea: the person doing the protecting and the
+      person being protected are not the same person &mdash; and the person being protected
+      should have to learn nothing at all.
+    </p>
+  </div>
+
+  <div class="band">
+    <div class="actors">
+      <div class="actor">
+        <span class="role">The one in charge</span>
+        <span class="name">You</span>
+        <span class="surface-note">
+          An app on your own phone. You choose who is allowed to ring your parent, you see who
+          has been trying, and you make every decision.
+        </span>
+        <span class="cadence">A minute or two a week</span>
+      </div>
+
+      <div class="actor">
+        <span class="role">The one protected</span>
+        <span class="name">Your parent</span>
+        <span class="surface-note">
+          They get a text, tap a link, and agree. Nothing to install to say yes. Their phone,
+          their number, their contacts &mdash; all unchanged.
+        </span>
+        <span class="cadence">Once, at the start</span>
+      </div>
+
+      <div class="actor">
+        <span class="role">The stranger</span>
+        <span class="name">Whoever is calling</span>
+        <span class="surface-note">
+          They can reply to one text message. That reply comes to you to read. It cannot
+          change anything by itself.
+        </span>
+        <span class="cadence">Only if you ask them</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Your parent can always say no &mdash; and always change their mind</h3>
+      <p>
+        Nothing starts until they agree. Once it has started, they can see who is looking after
+        their calls, and they can end it themselves at any time by replying STOP to a text. That
+        is not a setting buried in an app they will never open. It is one word, in the messages
+        app they already use.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="loop">
+  <div class="spine stack">
+    <div>
+      <p class="eyebrow">The heart of it</p>
+      <h2>What happens when an unknown number rings</h2>
+    </div>
+    <p class="dim">
+      The order here matters more than anything else. The phone protects your parent
+      immediately and on its own. Everything after that happens at your pace, and none of it
+      can change what already happened on the phone.
+    </p>
+  </div>
+
+  <div class="band">
+    <div class="loop">
+      <div class="step" data-actor="phone">
+        <span class="num"></span>
+        <div>
+          <h3>The phone handles it instantly</h3>
+          <p>
+            Your parent&rsquo;s phone already knows who is on the trusted list. It checks that
+            list itself, in a fraction of a second, and acts. No waiting, no spinner, and no
+            internet connection needed &mdash; it works in a basement, on a plane, or during an
+            outage.
+          </p>
+          <span class="who-does">Happens on their phone</span>
+        </div>
+      </div>
+
+      <div class="step" data-actor="you">
+        <span class="num"></span>
+        <div>
+          <h3>You get a notification</h3>
+          <p>
+            Someone new tried to reach your parent. You see it when you next pick up your phone.
+            Your parent is not asked anything and is not interrupted.
+          </p>
+          <span class="who-does">Happens on your phone</span>
+        </div>
+      </div>
+
+      <div class="step" data-actor="you">
+        <span class="num"></span>
+        <div>
+          <h3>You can ask the caller who they are</h3>
+          <p>
+            Kinly sends them a short text asking for their name and their reason. You are shown
+            the exact words before it goes, every time. You cannot write your own message
+            &mdash; and neither can anyone else who ever gets into your account.
+          </p>
+          <span class="who-does">Your choice, never automatic</span>
+        </div>
+      </div>
+
+      <div class="step" data-actor="caller">
+        <span class="num"></span>
+        <div>
+          <h3>They reply in their own words</h3>
+          <p>
+            You read exactly what they wrote, unedited. A real dentist&rsquo;s office answers
+            plainly. A scammer usually does not answer at all.
+          </p>
+          <span class="who-does">Comes back to you, not to your parent</span>
+        </div>
+      </div>
+
+      <div class="step" data-actor="you">
+        <span class="num"></span>
+        <div>
+          <h3>You decide</h3>
+          <p>
+            Let them through, block them, or leave it. There is no deadline and no pressure, and
+            nothing gets decided for you if you do nothing.
+          </p>
+          <span class="who-does">Always a person, never the software</span>
+        </div>
+      </div>
+
+      <div class="step" data-actor="phone">
+        <span class="num"></span>
+        <div>
+          <h3>Their phone updates within seconds</h3>
+          <p>
+            The decision reaches your parent&rsquo;s phone almost immediately, and the phone
+            keeps working from it even if it later loses signal entirely.
+          </p>
+          <span class="who-does">Back to their phone</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>One thing to know about iPhones</h3>
+      <p>
+        This full loop works on Android phones. On an iPhone, Apple does not let any app see
+        that a call came in &mdash; so Kinly can still block and label numbers, but it cannot
+        tell you about a call your parent did not answer. That is Apple&rsquo;s rule, not our
+        choice, and we say so during setup rather than letting a family find out the hard way.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="states">
+  <div class="spine stack">
+    <div>
+      <p class="eyebrow">The whole system, in three groups</p>
+      <h2>Everyone who calls is one of three things</h2>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="states">
+      <div class="state-card is-trusted">
+        <h3>People you trust</h3>
+        <p>
+          Family, neighbours, the doctor&rsquo;s office, the pharmacy. Their calls ring
+          normally, exactly as they always have.
+        </p>
+        <span class="who">You added them</span>
+      </div>
+
+      <div class="state-card is-unknown">
+        <h3>Everyone else</h3>
+        <p>
+          Anyone not on either list. You choose what happens to them &mdash; and you always
+          find out they called, whichever you choose.
+        </p>
+        <span class="who">The default for a stranger</span>
+      </div>
+
+      <div class="state-card is-blocked">
+        <h3>People you&rsquo;ve blocked</h3>
+        <p>
+          The call is rejected. Your parent is not told, not shown a missed call, and never has
+          to think about it again.
+        </p>
+        <span class="who">You blocked them</span>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Nobody is on a list until you put them there</h3>
+      <p>
+        Kinly does not keep a giant database of &ldquo;bad numbers&rdquo; and does not try to
+        guess who is a scammer. It only knows the people you have personally decided about.
+        Everyone else is simply a stranger, handled the way you told it to handle strangers.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="simulator">
+  <div class="spine stack">
+    <div>
+      <p class="eyebrow">Try it</p>
+      <h2>See exactly what the phone would do</h2>
+    </div>
+    <p class="dim">
+      Choose who is calling and what you have decided about strangers. This is the real
+      behaviour, not an illustration.
+    </p>
+  </div>
+
+  <div class="band">
+    <div class="exhibit">
+      <div class="exhibit-head">
+        <span class="t">An incoming call</span>
+        <span class="s">on your parent&rsquo;s phone</span>
+      </div>
+      <div class="exhibit-body">
+        <div class="sim-grid">
+          <div class="ctrl-group">
+            <span class="ctrl-label" id="lbl-caller">Who is calling?</span>
+            <div class="controls" role="group" aria-labelledby="lbl-caller" id="sim-state">
+              <button class="chip" type="button" data-state="TRUSTED" aria-pressed="false">Someone you trust</button>
+              <button class="chip" type="button" data-state="UNKNOWN" aria-pressed="true">A stranger</button>
+              <button class="chip" type="button" data-state="BLOCKED" aria-pressed="false">Someone you blocked</button>
+            </div>
+          </div>
+
+          <div class="ctrl-group">
+            <span class="ctrl-label" id="lbl-policy">What should strangers get?</span>
+            <div class="controls" role="group" aria-labelledby="lbl-policy" id="sim-policy">
+              <button class="chip" type="button" data-policy="SILENCE" aria-pressed="true">Don't ring the phone</button>
+              <button class="chip" type="button" data-policy="ALLOW" aria-pressed="false">Ring normally</button>
+              <button class="chip" type="button" data-policy="BLOCK" aria-pressed="false">Reject the call</button>
+            </div>
+            <p class="policy-note" id="policy-note"></p>
+          </div>
+        </div>
+
+        <div class="verdict">
+          <div class="verdict-top">
+            <span class="verdict-action" id="v-action">The phone stays quiet</span>
+            <span class="pill unknown" id="v-pill">not on either list</span>
+          </div>
+          <p class="verdict-what" id="v-what"></p>
+          <p class="verdict-meta" id="v-meta"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="honesty">
+  <div class="spine stack">
+    <div>
+      <p class="eyebrow">What you see</p>
+      <h2>&ldquo;Mom is protected&rdquo; is a promise, so we only say it when it&rsquo;s true</h2>
+    </div>
+    <p class="dim">
+      Any app can show a green tick. The hard part is refusing to show one when something has
+      quietly stopped working. Tap through the six things Kinly might tell you &mdash; watch how
+      rarely it is allowed to be green.
+    </p>
+  </div>
+
+  <div class="band">
+    <div class="exhibit">
+      <div class="exhibit-head">
+        <span class="t">Your home screen</span>
+        <span class="s">six things it can say</span>
+      </div>
+      <div class="exhibit-body">
+        <div class="controls" role="group" aria-label="What Kinly is showing" id="status-picker" style="margin-bottom:1.75rem;">
+          <button class="chip" type="button" data-status="PROTECTED" aria-pressed="true">All working</button>
+          <button class="chip" type="button" data-status="STALE" aria-pressed="false">Possibly out of date</button>
+          <button class="chip" type="button" data-status="DEVICE_INACTIVE" aria-pressed="false">Switched off</button>
+          <button class="chip" type="button" data-status="NO_DEVICE" aria-pressed="false">Phone not set up</button>
+          <button class="chip" type="button" data-status="AWAITING_AUTHORIZATION" aria-pressed="false">Waiting for approval</button>
+          <button class="chip" type="button" data-status="REVOKED" aria-pressed="false">Ended</button>
+        </div>
+
+        <div class="bench">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="notch"></div>
+              <div class="phone-nav">
+                <span>Home</span>
+                <span class="n-sub">Kinly</span>
+              </div>
+
+              <div class="status-card" id="sc">
+                <div class="sc-head">
+                  <span class="sc-dot" id="sc-dot"></span>
+                  <span class="sc-headline" id="sc-headline">Mom is protected</span>
+                </div>
+                <p class="sc-detail" id="sc-detail">
+                  Trusted callers ring through. Unknown callers are handled for you.
+                </p>
+                <span class="sc-sync" id="sc-sync">Last checked 3 minutes ago</span>
+              </div>
+
+              <div class="row-item">
+                <div>
+                  <div class="ri-main">People who tried to call</div>
+                  <div class="ri-sub">2 waiting for you</div>
+                </div>
+                <span class="pill unknown">2</span>
+              </div>
+
+              <div class="row-item">
+                <div>
+                  <div class="ri-main">Trusted callers</div>
+                  <div class="ri-sub">14 people can ring through</div>
+                </div>
+              </div>
+
+              <div style="margin-top:auto; display:flex; flex-direction:column; gap:0.55rem;">
+                <div class="btn-accent">Protect someone</div>
+                <div class="btn-quiet">Their phone</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bench-notes">
+            <span class="note-title">Only one of the six is green</span>
+            <p>
+              A reassuring green tick over &ldquo;their phone stopped checking in three days
+              ago&rdquo; is exactly the lie this product refuses to tell. If protection is not
+              fully working, the screen says which part is not working and what to do about it.
+            </p>
+            <p>
+              The app is dark and warm on purpose. It gets opened late at night, by someone who
+              is worried about their mother.
+            </p>
+
+            <div class="status-key">
+              <div class="key-row">
+                <i style="background:#63B98C"></i>
+                <span><b>Green</b>Everything is genuinely working right now. Nothing else earns this colour.</span>
+              </div>
+              <div class="key-row">
+                <i style="background:#DFA83F"></i>
+                <span><b>Amber</b>Working, but not completely &mdash; or not set up yet.</span>
+              </div>
+              <div class="key-row">
+                <i style="background:#DC7A6A"></i>
+                <span><b>Red</b>Calls are not being protected at all.</span>
+              </div>
+              <div class="key-row">
+                <i style="background:#A18BD6"></i>
+                <span><b>Violet</b>Waiting on your parent to decide something.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sms">
+  <div class="spine stack">
+    <div>
+      <p class="eyebrow">Every message we send</p>
+      <h2>This is all of it &mdash; there are no others</h2>
+    </div>
+    <p class="dim">
+      Kinly can send exactly three text messages, and you are reading all three. We never
+      pretend to be a bank, a phone company, the government, or your parent.
+    </p>
+  </div>
+
+  <div class="band">
+    <div class="thread">
+      <div class="msg-block">
+        <div class="msg-meta">
+          <span class="id">1 &mdash; to your parent, at the very start</span>
+        </div>
+        <div class="bubble">Kinly: Sarah would like to help protect calls to this number.
+
+Review and approve or decline: kinly.app/a/7Kq2&hellip;
+
+This link expires in 15 minutes. If you weren't expecting this, ignore this message.
+Reply STOP to opt out.</div>
+        <p class="msg-note">
+          This is the moment your parent agrees. It names who is asking, says plainly what will
+          happen, and tells them to ignore it if they weren&rsquo;t expecting it &mdash; because
+          a text nobody was expecting is exactly how scams start.
+        </p>
+      </div>
+
+      <div class="msg-block">
+        <div class="msg-meta">
+          <span class="id">2 &mdash; to a caller, only when you choose to ask</span>
+        </div>
+        <div class="bubble">You tried to reach someone who uses Kinly call protection.
+
+Please reply with your name and why you're calling.
+
+Example: Sarah from Dr. Smith's office - calling about an appointment.
+
+Reply STOP to opt out.</div>
+        <p class="msg-note">
+          Notice what it does not say: not who they called, not your parent&rsquo;s name, not
+          your name, not even that somebody is reviewing them. It asks a question and gives
+          away nothing.
+        </p>
+      </div>
+
+      <div class="msg-block">
+        <div class="msg-meta">
+          <span>The caller writes back &mdash; and you read it exactly as they wrote it</span>
+        </div>
+        <div class="bubble inbound">Hello, it's Marcus from Ridgeway Dental. We're confirming the appointment on Thursday morning.</div>
+      </div>
+
+      <div class="msg-block">
+        <div class="msg-meta">
+          <span class="id">Kinly tidies it up for you &mdash; but never judges it</span>
+        </div>
+        <div class="ai-card">
+          <span class="ai-label">What this caller said</span>
+          <p style="font-size:0.96rem; line-height:1.55;">
+            The caller says they are confirming a dental appointment for Thursday morning.
+          </p>
+          <dl class="ai-fields">
+            <dt>Says their name is</dt><dd>Marcus</dd>
+            <dt>Says they're from</dt><dd>Ridgeway Dental</dd>
+            <dt>Reason given</dt><dd>Confirming an appointment</dd>
+            <dt>Wants</dt><dd>Confirmation of Thursday morning</dd>
+          </dl>
+          <p class="ai-disclaimer">
+            Kinly summarized what this caller said. It can&rsquo;t verify whether any of it is
+            true.
+          </p>
+        </div>
+        <p class="msg-note">
+          The caller&rsquo;s own words always come first, unedited. The summary sits underneath,
+          clearly labelled as a claim rather than a fact. There is no score, no
+          &ldquo;probably safe&rdquo;, no traffic light &mdash; because the moment a family
+          starts trusting a score, they have stopped reading, and a good scammer writes a very
+          convincing message.
+        </p>
+      </div>
+
+      <div class="msg-block">
+        <div class="msg-meta">
+          <span class="id">3 &mdash; to someone you decide to let through</span>
+        </div>
+        <div class="bubble">Kinly: You can now call this number.</div>
+        <p class="msg-note">
+          There is deliberately no message for blocking. Telling a scammer they were caught just
+          teaches them to try a new number, and telling a real person they were blocked invites
+          an awkward phone call to your parent.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="decisions">
+  <div class="spine stack">
+    <div>
+      <p class="eyebrow">The rules we built it on</p>
+      <h2>Six promises the design has to keep</h2>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="decisions">
+      <div class="decision">
+        <h3>If anything breaks, the call comes through</h3>
+        <p>
+          When the phone cannot read its own list for any reason, it lets the call ring and
+          tells you something is wrong.
+        </p>
+        <span class="because">A scam call getting through is fixable. A silenced ambulance is not.</span>
+      </div>
+
+      <div class="decision">
+        <h3>Nobody can read your family&rsquo;s numbers &mdash; including us</h3>
+        <p>
+          Phone numbers are scrambled before they are ever stored, using two separate keys kept
+          in two separate places.
+        </p>
+        <span class="because">If our entire database were stolen tomorrow, it would contain no readable numbers.</span>
+      </div>
+
+      <div class="decision">
+        <h3>It works with no signal</h3>
+        <p>
+          Your parent&rsquo;s phone never has to ask us anything to protect them. It already
+          knows the answer and decides by itself.
+        </p>
+        <span class="because">Protection that needs a good connection is not protection.</span>
+      </div>
+
+      <div class="decision">
+        <h3>The AI never gets a vote</h3>
+        <p>
+          It summarises what a caller claimed and stops there. There is nowhere in the entire
+          system to store a verdict, so no screen could ever show you one.
+        </p>
+        <span class="because">You decide who may call your mother. That is the whole point.</span>
+      </div>
+
+      <div class="decision">
+        <h3>A stranger can never change anything</h3>
+        <p>
+          The most any caller can ever do is leave a reply for you to read. No message from
+          outside can add itself to a list or take itself off one.
+        </p>
+        <span class="because">Otherwise the people you're protecting against would hold the controls.</span>
+      </div>
+
+      <div class="decision">
+        <h3>Your parent keeps the final say</h3>
+        <p>
+          They approve before anything starts, they can see who is managing their calls, and
+          they can end it themselves at any time.
+        </p>
+        <span class="because">Protecting someone is not the same as taking their phone away.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="spine">
+  <p class="f-line">
+    Your mother should not have to become suspicious of her own phone.
+  </p>
+  <p class="f-sub">
+    She keeps her number, her handset, and her habits. Somebody who loves her quietly decides
+    who gets through.
+  </p>
+  <p class="f-meta">
+    Kinly &middot; call protection for families<br />
+    Currently in development. Full protection is available on Android today.
+  </p>
+</footer>
+
+<script>
+  (function () {
+    'use strict';
+
+    var ACTION_COLOR = {
+      ALLOWED: '#63B98C',
+      SILENCED: '#DFA83F',
+      BLOCKED: '#DC7A6A'
+    };
+
+    var ACTION_HEADLINE = {
+      ALLOWED: 'The phone rings',
+      SILENCED: 'The phone stays quiet',
+      BLOCKED: 'The call is rejected'
+    };
+
+    var ACTION_COPY = {
+      ALLOWED: 'It rings normally, just as it always has.',
+      SILENCED: "It doesn't ring, so your parent isn't disturbed. The caller can still leave a voicemail the normal way.",
+      BLOCKED: "The call never gets through, and your parent doesn't even see a missed call."
+    };
+
+    var POLICY_COPY = {
+      SILENCE: "Strangers won't ring the phone. They can still leave a voicemail, and you'll be told they called.",
+      ALLOW: "Strangers ring as usual. You'll still be told who called.",
+      BLOCK: 'Strangers are rejected outright. Only people you trust get through — including ones you haven’t added yet.'
+    };
+
+    var STATE_PILL = {
+      TRUSTED: { cls: 'trusted', text: 'on your trusted list' },
+      UNKNOWN: { cls: 'unknown', text: 'not on either list' },
+      BLOCKED: { cls: 'blocked', text: 'on your blocked list' }
+    };
+
+    function decide(state, policy) {
+      if (state === 'TRUSTED') return 'ALLOWED';
+      if (state === 'BLOCKED') return 'BLOCKED';
+      if (policy === 'ALLOW') return 'ALLOWED';
+      if (policy === 'BLOCK') return 'BLOCKED';
+      return 'SILENCED';
+    }
+
+    var simState = 'UNKNOWN';
+    var simPolicy = 'SILENCE';
+
+    var vAction = document.getElementById('v-action');
+    var vPill = document.getElementById('v-pill');
+    var vWhat = document.getElementById('v-what');
+    var vMeta = document.getElementById('v-meta');
+    var policyNote = document.getElementById('policy-note');
+
+    function renderSim() {
+      var action = decide(simState, simPolicy);
+      var pill = STATE_PILL[simState];
+
+      vAction.textContent = ACTION_HEADLINE[action];
+      vAction.style.color = ACTION_COLOR[action];
+
+      vPill.className = 'pill ' + pill.cls;
+      vPill.textContent = pill.text;
+
+      var what = ACTION_COPY[action];
+      if (simState === 'UNKNOWN') {
+        what += ' Either way, you are told that they called.';
+      } else {
+        what += ' You already decided about this caller, so your setting for strangers never comes into it.';
+      }
+      vWhat.textContent = what;
+
+      vMeta.innerHTML = simState === 'UNKNOWN'
+        ? 'You are notified: <b>yes</b> &nbsp;&middot;&nbsp; Your parent is asked to decide anything: <b>no</b>'
+        : 'You are notified: <b>no, you already decided</b> &nbsp;&middot;&nbsp; Your parent is asked to decide anything: <b>no</b>';
+
+      policyNote.textContent = POLICY_COPY[simPolicy] +
+        (simState === 'UNKNOWN' ? '' : ' This setting is not used for this caller.');
+    }
+
+    function wire(containerId, attr, onPick) {
+      var container = document.getElementById(containerId);
+      if (!container) return;
+      container.addEventListener('click', function (event) {
+        var button = event.target.closest('button[' + attr + ']');
+        if (!button) return;
+        var buttons = container.querySelectorAll('button[' + attr + ']');
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].setAttribute('aria-pressed', String(buttons[i] === button));
+        }
+        onPick(button.getAttribute(attr));
+      });
+    }
+
+    wire('sim-state', 'data-state', function (value) { simState = value; renderSim(); });
+    wire('sim-policy', 'data-policy', function (value) { simPolicy = value; renderSim(); });
+    renderSim();
+
+    var NAME = 'Mom';
+
+    var STATUS = {
+      PROTECTED: {
+        headline: NAME + ' is protected',
+        detail: 'Trusted callers ring through. Unknown callers are handled for you.',
+        color: '#63B98C',
+        sync: 'Last checked 3 minutes ago'
+      },
+      STALE: {
+        headline: NAME + ' is protected',
+        detail: 'Protection may be out of date. Their phone has not checked in recently.',
+        color: '#DFA83F',
+        sync: 'Last checked 4 days ago'
+      },
+      DEVICE_INACTIVE: {
+        headline: "Call protection isn't active on this phone",
+        detail: 'Open Kinly on their phone to finish turning on call protection.',
+        color: '#DC7A6A',
+        sync: 'Another app is handling calls'
+      },
+      NO_DEVICE: {
+        headline: NAME + "'s phone isn't set up yet",
+        detail: "You can add trusted and blocked callers now, but calls aren't being screened until the app is set up on their phone.",
+        color: '#DFA83F',
+        sync: 'Their phone hasn’t been set up'
+      },
+      AWAITING_AUTHORIZATION: {
+        headline: 'Waiting for ' + NAME + ' to approve',
+        detail: 'We sent a text message. Calls are not being screened yet.',
+        color: '#A18BD6',
+        sync: 'The link expires in 15 minutes'
+      },
+      REVOKED: {
+        headline: 'Protection for ' + NAME + ' has ended',
+        detail: 'No calls are being screened.',
+        color: '#857567',
+        sync: 'They ended it themselves'
+      }
+    };
+
+    var card = document.getElementById('sc');
+    var dot = document.getElementById('sc-dot');
+    var headline = document.getElementById('sc-headline');
+    var detail = document.getElementById('sc-detail');
+    var sync = document.getElementById('sc-sync');
+
+    function paint(value) {
+      var s = STATUS[value];
+      if (!s) return;
+      headline.textContent = s.headline;
+      detail.textContent = s.detail;
+      sync.textContent = s.sync;
+      dot.style.background = s.color;
+      dot.style.boxShadow = value === 'PROTECTED' ? '0 0 12px 1px rgba(99,185,140,0.5)' : 'none';
+      card.style.borderLeftColor = s.color;
+    }
+
+    wire('status-picker', 'data-status', paint);
+    paint('PROTECTED');
+  })();
+</script>
+</body>
+</html>
